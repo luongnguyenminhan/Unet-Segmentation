@@ -14,12 +14,6 @@ if __name__ == "__main__":
     parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--data_path", type=str, default="./data")
     parser.add_argument("--model_save_path", type=str, default="./models/unet.pth")
-
-    parser.add_argument("--aug_img_path", type=str, default="./data/new_train")
-    parser.add_argument("--aug_mask_path", type=str, default="./data/new_train_masks")
-    parser.add_argument("--train_path", type=str, default="./data/train")
-    parser.add_argument("--masks_path", type=str, default="./data/train_masks")
-    parser.add_argument("--num_augmentations", type=int, default=5)
     args = parser.parse_args()
 
     LEARNING_RATE = args.learning_rate
@@ -28,15 +22,9 @@ if __name__ == "__main__":
     DATA_PATH = args.data_path
     MODEL_SAVE_PATH = args.model_save_path
 
-    AUG_IMG_PATH = args.aug_img_path
-    AUG_MASK_PATH = args.aug_mask_path
-    TRAIN_PATH = args.data_path
-    MASKS_PATH = args.masks_path
-    NUM_AUGMENTATIONS = args.num_aug
-
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(device)
-    train_dataset = HumanDataset(DATA_PATH, AUG_IMG_PATH, AUG_MASK_PATH, TRAIN_PATH, MASKS_PATH, NUM_AUGMENTATIONS)
+    train_dataset = HumanDataset(DATA_PATH)
 
     generator = torch.Generator().manual_seed(42)
     train_dataset, val_dataset = random_split(train_dataset, [0.8, 0.2], generator=generator)
