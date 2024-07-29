@@ -14,6 +14,7 @@ if __name__ == "__main__":
     parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--data_path", type=str, default="./data")
     parser.add_argument("--model_save_path", type=str, default="./models/unet.pth")
+    parser.add_argument("--load_weight", type=str, default=None)
     args = parser.parse_args()
 
     LEARNING_RATE = args.learning_rate
@@ -21,6 +22,7 @@ if __name__ == "__main__":
     EPOCHS = args.epochs
     DATA_PATH = args.data_path
     MODEL_SAVE_PATH = args.model_save_path
+    LOAD_WEIGHT = args.load_weight
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(device)
@@ -37,6 +39,10 @@ if __name__ == "__main__":
                                 shuffle=True)
 
     model = UNet(in_channels=3, num_classes=1).to(device)
+    if LOAD_WEIGHT:
+        checkpoint = torch.load(LOAD_WEIGHT)
+        model.load_state_dict(checkpoint)
+
     optimizer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
     criterion = nn.BCEWithLogitsLoss()
 
@@ -73,8 +79,8 @@ if __name__ == "__main__":
             val_loss = val_running_loss / (idx + 1)
 
         print("-"*30)
-        print(f"Train Loss EPOCH {epoch+1}: {train_loss:.4f}")
-        print(f"Valid Loss EPOCH {epoch+1}: {val_loss:.4f}")
+        print(f"Train Loss EPOCH {epoch+1}: {train_loss:.6f}")
+        print(f"Valid Loss EPOCH {epoch+1}: {val_loss:.6f}")
         print("-"*30)
 
     torch.save(model.state_dict(), MODEL_SAVE_PATH)
