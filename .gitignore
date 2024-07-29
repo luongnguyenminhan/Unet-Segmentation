@@ -7,6 +7,4 @@ models
 notes.txt
 *.ipynb
 storage
-*.jpg
-*.png
 data
