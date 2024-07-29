@@ -40,6 +40,7 @@ if __name__ == "__main__":
 
     model = UNet(in_channels=3, num_classes=1).to(device)
     if LOAD_WEIGHT:
+        print("Loading weights", LOAD_WEIGHT)
         checkpoint = torch.load(LOAD_WEIGHT)
         model.load_state_dict(checkpoint)
 
