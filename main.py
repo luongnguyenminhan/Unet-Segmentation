@@ -13,7 +13,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", type=int, default=8)
     parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--data_path", type=str, default="./data")
-    parser.add_argument("--model_save_path", type=str, default="./models/unet.pth")
+    parser.add_argument("--model_save_path", type=str, default="./models")
     parser.add_argument("--load_weight", type=str, default=None)
     args = parser.parse_args()
 
@@ -82,6 +82,8 @@ if __name__ == "__main__":
         print("-"*30)
         print(f"Train Loss EPOCH {epoch+1}: {train_loss:.6f}")
         print(f"Valid Loss EPOCH {epoch+1}: {val_loss:.6f}")
+        torch.save(model.state_dict(), MODEL_SAVE_PATH + f"/unet_epoch_{epoch+1}.pth")
+        print("Model Saved")
         print("-"*30)
 
     torch.save(model.state_dict(), MODEL_SAVE_PATH)
