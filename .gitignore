@@ -1,0 +1,12 @@
+media
+__pycache__
+.DS_Store
+*.pth
+*.rar
+models
+notes.txt
+*.ipynb
+storage
+*.jpg
+*.png
+data
