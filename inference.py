@@ -72,6 +72,7 @@ def single_image_inference(image_pth, model_pth, save_pth, device):
     plt.axis("off")
     plt.savefig(save_pth)
     # pred_mask.save(save_pth + "mask.jpg")
+    return pred_mask
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
