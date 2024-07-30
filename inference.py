@@ -67,8 +67,11 @@ def single_image_inference(image_pth, model_pth, save_pth, device):
     pred_mask[pred_mask > 0]=1
 
     # save mask using PIL
-    pred_mask = transforms.ToPILImage()(pred_mask)
-    pred_mask.save(save_pth + "mask.jpg")
+    fig = plt.figure(figsize=(10, 10))
+    plt.imshow(pred_mask, cmap="gray")
+    plt.axis("off")
+    plt.savefig(save_pth)
+    # pred_mask.save(save_pth + "mask.jpg")
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

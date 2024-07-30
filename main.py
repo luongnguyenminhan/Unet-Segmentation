@@ -86,4 +86,4 @@ if __name__ == "__main__":
         print("Model Saved")
         print("-"*30)
 
-    torch.save(model.state_dict(), MODEL_SAVE_PATH)
+    torch.save(model.state_dict(), MODEL_SAVE_PATH + "/unet_final.pth")

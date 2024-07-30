@@ -135,9 +135,13 @@ Project structured as follows:
 
 
 ### Inference <a class="anchor" id="inference"></a>
-`inference.py` file provides two functions for inference. If you want to run prediction on multiple images, you must use `pred_show_image_grid()` function by giving your data path, model path and device as arguments.
+`inference.py` file provides function for inference.
 
-If you want to run the prediction on single image, you must use `single-image-inference()` function by giving image path, model path and your device as arguments. 
+```
+python inference.py --single_img_path <> \
+                     --model_path ./models/<model>.pth \
+                     --save_path ./data/<maskName>.jpg
+```
 
 You can view a sample use inside `inference.py`.
 
@@ -147,3 +151,12 @@ In order to train the model you must run the command `python main.py`. File has 
 You must give your data directory and the directory you want to save your model to `DATA_PATH` and `MODEL_SAVE_PATH` variables in the `main.py` file.
 
 By the end of the training your model will be saved into the `MODEL_SAVE_PATH`.
+
+```
+!python main.py \
+    --learning_rate 0.001 \
+    --batch_size 3 \
+    --epochs 10 \
+    --data_path "./data" \
+    --model_save_path "./models"
+```
